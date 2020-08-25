@@ -18,10 +18,9 @@
 				<v-text-field label="Label:" :dark="dark" color="primary" id="month" />
 				<v-text-field label="Value:" :dark="dark" color="primary" id="value" />
 
-
-				<v-row justify="center"><v-btn color="pink accent-3" @click="add">add</v-btn></v-row>
-
-				
+				<v-row justify="center">
+					<v-btn color="pink accent-3" @click="add"><b style="color: white;">add</b></v-btn>
+				</v-row>
 
 			</div>
 
@@ -35,12 +34,16 @@
 
 				<h1 class="mx-3">Markers:</h1>
 
-				<div class="" v-for="(i, index) in labels">
+				<div v-for="(i, index) in labels" >
 					<v-card :dark="dark" class="mx-3 my-3 fullwidth">
-						<v-card-text> {{ i }}: {{ dataset[index] }}</v-card-text>
+						<v-card-text>
+							<b>
+								{{ i }}: <p style="float: right;">{{ dataset[index] }}</p>
+							</b>
+						</v-card-text>
 					</v-card>
 				</div>
-
+				
 			</v-sheet>
 		</v-bottom-sheet>
 	</v-app>
@@ -50,6 +53,25 @@
 	import Chart from './components/Chart.vue';
 
 	export default {
+		created() {
+			for (var i = 0; i < 20; i++) {
+
+				const k = i%2
+
+				console.log(k)
+				
+				if (k == 0) {
+					this.labels.push(i)
+					this.dataset.push(k)
+				}
+
+				if (k == 1) {
+					this.labels.push(i)
+					this.dataset.push(i)
+				}
+
+			}
+		},
 		methods: {
 			add() {
 				const month = document.querySelector('#month').value
@@ -68,8 +90,8 @@
 			return {
 				dark: true,
 				modal: false,
-				dataset: [0, 10, 5],
-				labels: ['ene', 'feb', 'mar']
+				dataset: [],
+				labels: []
 			}
 		},
 		components: {
@@ -87,5 +109,7 @@
 		height: 250vw;
 		border-radius: 35px;
 		padding-top: 50px;
+		overflow-y: scroll;
+		padding-bottom: 500px;
 	}
 </style>

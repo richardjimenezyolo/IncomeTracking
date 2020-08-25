@@ -11,7 +11,7 @@
 			<Chart class="mx-2 my-5" label="Tracking" :dataset="dataset" :labels="labels" />
 
 
-			<h1 class="mx-2">Add a market:</h1>
+			<h1 class="mx-2">Add a marker:</h1>
 			
 			<div class="mx-5 mt-5">
 
@@ -33,7 +33,7 @@
 				down: _ => modal = false
 			}">
 
-				<h1 class="mx-3">Markets:</h1>
+				<h1 class="mx-3">Markers:</h1>
 
 				<div class="" v-for="(i, index) in labels">
 					<v-card :dark="dark" class="mx-3 my-3 fullwidth">
@@ -86,6 +86,6 @@
 	#modal{
 		height: 250vw;
 		border-radius: 35px;
-		padding-top: 100px;
+		padding-top: 50px;
 	}
 </style>

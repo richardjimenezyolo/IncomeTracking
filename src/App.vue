@@ -53,25 +53,25 @@
 	import Chart from './components/Chart.vue';
 
 	export default {
-		created() {
-			for (var i = 0; i < 20; i++) {
+		// created() {
+		// 	for (var i = 0; i < 20; i++) {
 
-				const k = i%2
+		// 		const k = i%2
 
-				console.log(k)
+		// 		console.log(k)
 				
-				if (k == 0) {
-					this.labels.push(i)
-					this.dataset.push(k)
-				}
+		// 		if (k == 0) {
+		// 			this.labels.push(i)
+		// 			this.dataset.push(k)
+		// 		}
 
-				if (k == 1) {
-					this.labels.push(i)
-					this.dataset.push(i)
-				}
+		// 		if (k == 1) {
+		// 			this.labels.push(i)
+		// 			this.dataset.push(i)
+		// 		}
 
-			}
-		},
+		// 	}
+		// },
 		methods: {
 			add() {
 				const month = document.querySelector('#month').value

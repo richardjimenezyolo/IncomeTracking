@@ -22,7 +22,7 @@
 	                    labels: this.labels,
 	                    datasets: [{
 	                        label: this.label,
-	                        borderColor: 'rgb(245, 0, 87)',
+	                        borderColor: 'rgb(0, 255, 0)',
 	                        backgroundColor: 'rgba(0, 0, 0, 0)',
 	                        data: this.dataset
 	                    }]

@@ -34,11 +34,11 @@
 
 				<h1 class="mx-3">Markers:</h1>
 
-				<div v-for="(i, index) in labels" >
+				<div v-for="(i, index) in reverseLabels" >
 					<v-card :dark="dark" class="mx-3 my-3 fullwidth">
 						<v-card-text>
 							<b>
-								<p class="p" style="display: inline;">{{ i }}:</p><p class="p" style="float: right;">{{ dataset[index] }}</p>
+								<p class="p" style="display: inline;">{{ i }}:</p><p class="p" style="float: right;">{{ reverseDataset[index] }}</p>
 							</b>
 						</v-card-text>
 					</v-card>
@@ -108,7 +108,22 @@
 				dark: true,
 				modal: false,
 				dataset: [],
-				labels: []
+				labels: [],
+
+				reverseLabels: [],
+				reverseDataset: []
+			}
+		},
+		watch: {
+			labels() {
+				for (var i in this.labels) {
+					
+					this.reverseLabels.push(this.labels[i])
+					this.reverseDataset.push(this.dataset[i])
+					
+				}
+				this.reverseLabels.reverse()
+				this.reverseDataset.reverse()
 			}
 		},
 		components: {

@@ -1,6 +1,6 @@
 {
-  "name": "IncomeTracking",
-  "displayName": "IncomeTracking",
+  "name": "IncomeTracker",
+  "displayName": "IncomeTracker",
   "version": "1.0.0",
   "description": "A simple app to track you income.",
   "main": "index.js",
@@ -12,8 +12,8 @@
   "keywords": [
     "ecosystem:cordova"
   ],
-  "author": "Apache Cordova Team",
-  "license": "Apache-2.0",
+  "author": "Richard Jimenez",
+  "license": "MIT",
   "devDependencies": {
     "cordova-android": "^9.0.0",
     "cordova-plugin-webpack": "^1.0.5",

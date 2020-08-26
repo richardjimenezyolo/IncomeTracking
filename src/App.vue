@@ -5,7 +5,7 @@
 		<div>
 
 			<v-toolbar :dark="dark">
-				<v-toolbar-title>IncomeTracking</v-toolbar-title>
+				<v-toolbar-title>Income Tracker</v-toolbar-title>
 			</v-toolbar>
 
 			<Chart class="mx-2 my-5" label="Tracking" :dataset="dataset" :labels="labels" />
@@ -38,7 +38,7 @@
 					<v-card :dark="dark" class="mx-3 my-3 fullwidth">
 						<v-card-text>
 							<b>
-								{{ i }}: <p style="float: right;">{{ dataset[index] }}</p>
+								<p class="p" style="display: inline;">{{ i }}:</p><p class="p" style="float: right;">{{ dataset[index] }}</p>
 							</b>
 						</v-card-text>
 					</v-card>
@@ -51,39 +51,56 @@
 
 <script>
 	import Chart from './components/Chart.vue';
+	import url from './.env.js';
 
 	export default {
-		// created() {
-		// 	for (var i = 0; i < 20; i++) {
+		created() {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET",`${url}/get`,true)
+			xhr.send()
+			xhr.onreadystatechange = () => {
+			    if (xhr.readyState == 4 && xhr.status == 200){
+			        var response = JSON.parse(xhr.response);
+			        
+			        console.log(response)
 
-		// 		const k = i%2
+			        for (var i in response.res) {
+			        	this.labels.push(response.res[i][0])
+			        	console.log(response.res[i][0])
 
-		// 		console.log(k)
-				
-		// 		if (k == 0) {
-		// 			this.labels.push(i)
-		// 			this.dataset.push(k)
-		// 		}
-
-		// 		if (k == 1) {
-		// 			this.labels.push(i)
-		// 			this.dataset.push(i)
-		// 		}
-
-		// 	}
-		// },
+			        	this.dataset.push(response.res[i][1])
+			        	console.log(response.res[i][1])
+			        }
+			    }
+			}
+		},
 		methods: {
 			add() {
 				const month = document.querySelector('#month').value
 				const value = parseInt(document.querySelector('#value').value)
 
-				document.querySelector('#month').value = ""
-				document.querySelector('#value').value = ""
+				// document.querySelector('#month').value = ""
+				// document.querySelector('#value').value = ""
 
 				console.log([month, value])
 
-				this.dataset.push(value)
-				this.labels.push(month)
+				
+
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET",`${url}/add?label=${month}&data=${value}`,true)
+				xhr.send()
+				xhr.onreadystatechange = () => {
+				    if (xhr.readyState == 4 && xhr.status == 200){
+				        var response = xhr.response;
+				        console.log(response)
+				        this.dataset.push(value)
+						this.labels.push(month)
+				    }
+
+				    else if (this.status == 0) {
+				    	alert("IMPOSIBLE TO CONNECT TO THE DATABASE")
+				    }
+				}
 			}
 		},
 		data() {
@@ -111,5 +128,8 @@
 		padding-top: 50px;
 		overflow-y: scroll;
 		padding-bottom: 500px;
+	}
+	.p{
+		color: white;
 	}
 </style>

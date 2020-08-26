@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.richard.IncomeTracking" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>IncomeTracking</name>
+<widget id="com.richard.IncomeTracker" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>IncomeTracker</name>
     <description>
-        A simple app to track you income.
+        A simple app to track your income.
     </description>
     <author email="richardjimenez176@gmail.com" href="https://github.com/richardjimenezyolo/IncomeTracking">
         Richard Jimenez
@@ -23,3 +23,4 @@
         <allow-intent href="itms-apps:*" />
     </platform>
 </widget>
+

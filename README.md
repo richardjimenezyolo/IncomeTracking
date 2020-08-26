@@ -1,2 +1,2 @@
 # IncomeTracking
-A simple app to track you income.
+A simple app to track your income.

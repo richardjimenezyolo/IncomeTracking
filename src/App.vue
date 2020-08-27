@@ -29,10 +29,10 @@
 
 		<v-bottom-sheet v-model="modal">
 			<v-sheet id="modal" class="pink accent-3" v-touch="{
-				down: _ => modal = false
+				down: _ => dismissModal()
 			}">
 
-				<h1 class="mx-3">Markers:</h1>
+				<h1 class="mx-3" id="observer">Markers:</h1>
 
 				<div v-for="(i, index) in reverseLabels" >
 					<v-card :dark="dark" class="mx-3 my-3 fullwidth">
@@ -100,6 +100,15 @@
 				    else if (this.status == 0) {
 				    	alert("IMPOSIBLE TO CONNECT TO THE DATABASE")
 				    }
+				}
+			},
+			dismissModal() {
+				let modal = document.querySelector("#modal")
+
+				if (modal.scrollTop == 0) {
+					console.log('yolo')
+
+					this.modal = false
 				}
 			}
 		},

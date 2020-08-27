@@ -16,7 +16,7 @@
 			<div class="mx-5 mt-5">
 
 				<v-text-field label="Label:" :dark="dark" color="primary" id="month" />
-				<v-text-field label="Value:" :dark="dark" color="primary" id="value" />
+				<v-text-field label="Value:" type="number" :dark="dark" color="primary" id="value" />
 
 				<v-row justify="center">
 					<v-btn color="pink accent-3" @click="add"><b style="color: white;">add</b></v-btn>

@@ -1,11 +1,13 @@
 <template>
-	<v-app id="background" v-touch="{
-		up: _ => modal = true
-	}">
+	<v-app id="background">
 		<div>
 
 			<v-toolbar :dark="dark">
 				<v-toolbar-title>Income Tracker</v-toolbar-title>
+				<v-spacer/>
+				<v-btn icon @click="modal = true">
+					<v-icon>mdi-arrow-up</v-icon>
+				</v-btn>
 			</v-toolbar>
 
 			<Chart class="mx-2 my-5" label="Tracking" :dataset="dataset" :labels="labels" />
@@ -31,8 +33,12 @@
 			<v-sheet id="modal" class="pink accent-3" v-touch="{
 				down: _ => dismissModal()
 			}">
+				<v-btn icon color="white" class="float-right mx-5" @click="del">
+					<v-icon>mdi-delete</v-icon>
+				</v-btn>
 
 				<h1 class="mx-3" id="observer">Markers:</h1>
+
 
 				<div v-for="(i, index) in reverseLabels" >
 					<v-card :dark="dark" class="mx-3 my-3 fullwidth">
@@ -71,10 +77,43 @@
 			        	this.dataset.push(response.res[i][1])
 			        	console.log(response.res[i][1])
 			        }
+
+			        for (var i in this.labels) {
+						
+						this.reverseLabels.push(this.labels[i])
+						this.reverseDataset.push(this.dataset[i])
+						
+					}
+
+					this.reverseLabels.reverse()
+					this.reverseDataset.reverse()
 			    }
 			}
 		},
 		methods: {
+			del() {
+				console.log("delete")
+
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET",`${url}/delete`,true)
+				xhr.send()
+				xhr.onreadystatechange = () => {
+				    if (xhr.readyState == 4 && xhr.status == 200){
+				        var response = xhr.response;
+				        // Do Something
+
+				        console.log(response)
+
+
+
+				        this.labels.pop()
+				        this.dataset.pop()
+
+				        this.reverseLabels.shift()
+				        this.reverseDataset.shift()
+				    }
+				}
+			},
 			add() {
 				const month = document.querySelector('#month').value
 				const value = parseInt(document.querySelector('#value').value)
@@ -95,6 +134,8 @@
 				        console.log(response)
 				        this.dataset.push(value)
 						this.labels.push(month)
+						this.reverseLabels.unshift(this.labels[this.labels.length-1])
+						this.reverseDataset.unshift(this.dataset[this.dataset.length-1])
 				    }
 
 				    else if (this.status == 0) {
@@ -121,18 +162,6 @@
 
 				reverseLabels: [],
 				reverseDataset: []
-			}
-		},
-		watch: {
-			labels() {
-				for (var i in this.labels) {
-					
-					this.reverseLabels.push(this.labels[i])
-					this.reverseDataset.push(this.dataset[i])
-					
-				}
-				this.reverseLabels.reverse()
-				this.reverseDataset.reverse()
 			}
 		},
 		components: {
